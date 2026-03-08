@@ -22,8 +22,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN mkdir -p /usr/local/lib/docker/cli-plugins/
 COPY --from=extra-tools /docker-compose /usr/local/lib/docker/cli-plugins/docker-compose
 
+COPY --chown=runner:docker entrypoint.sh /home/runner/entrypoint.sh
+RUN chmod +x /home/runner/entrypoint.sh
+
 # ARG DOCKER_GID=123
 # RUN groupmod -g ${DOCKER_GID} docker || true && \
 # usermod -aG docker runner
 
 USER runner
+WORKDIR /home/runner
+
+ENTRYPOINT ["./entrypoint.sh"]
