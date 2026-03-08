@@ -8,6 +8,8 @@ RUN if [ "$TARGETARCH" = "amd64" ]; then ARCH="x86_64"; \
     elif [ "$TARGETARCH" = "arm64" ]; then ARCH="aarch64"; fi \
     && curl -fLo /docker-compose "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-linux-${ARCH}" \
     && chmod +x /docker-compose
+
+
 FROM ghcr.io/actions/actions-runner:latest
 
 USER root
