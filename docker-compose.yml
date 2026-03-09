@@ -1,0 +1,12 @@
+services:
+  runner:
+    image: ghcr.io/elric2011/github-actions-runner:latest
+    container_name: github-actions-runner
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${STACKS_DIR}:${STACKS_DIR}
+    extra_hosts:
+      - host.docker.internal:host-gateway
